@@ -1,0 +1,8 @@
+# Requirements
+
+The following lines are needed in /etc/devfs.rules
+```
+[jenkins_jail=5]
+add include $devfsrures_jail
+add path '*vbox*' unhide
+```

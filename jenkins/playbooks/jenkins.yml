@@ -12,11 +12,23 @@
             state: latest
         loop:
             - vim-console
-      - name: Configure jenkins
+            - git
+            - vagrant
+            - virtualbox-ose
+            - rsync
+      - name: Configure services
         lineinfile:
             path: /etc/rc.conf
             regexp: "^{{ item }}$"
             line: "{{ item }}"
         loop:
             - 'jenkins_enable="YES"'
+      - name: Configure groups for jenkins
+        lineinfile:
+            path: /etc/group
+            regexp: "^{{ item }}$"
+            line: "{{ item }}"
+        loop:
+            - "operator:*:5:root,jenkins"
+            - "vboxusers:*:920:jenkins"
 ...
