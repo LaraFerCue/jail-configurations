@@ -1,0 +1,22 @@
+---
+- name: Jenkins
+  hosts: jenkins
+  tasks:
+      - name: Install jenkins
+        package:
+            name: jenkins
+            state: latest
+      - name: Development packages
+        package:
+            name: "{{ item }}"
+            state: latest
+        loop:
+            - vim-console
+      - name: Configure jenkins
+        lineinfile:
+            path: /etc/rc.conf
+            regexp: "^{{ item }}$"
+            line: "{{ item }}"
+        loop:
+            - 'jenkins_enable="YES"'
+...
