@@ -16,6 +16,7 @@
             - vagrant
             - virtualbox-ose
             - rsync
+            - subversion
       - name: Configure services
         lineinfile:
             path: /etc/rc.conf
