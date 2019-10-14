@@ -1,4 +1,4 @@
-- name: nfs-server
+- name: os-builder
   version: 12.0-RELEASE
   architecture: amd64
   components:
@@ -8,4 +8,4 @@
       devfs_ruleset: 5
   provision:
       type: file
-      path: playbooks/jenkins.yml
+      path: playbooks/os-builder.yml
