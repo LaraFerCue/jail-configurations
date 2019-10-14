@@ -1,0 +1,11 @@
+- name: nfs-server
+  version: 12.0-RELEASE
+  architecture: amd64
+  components:
+      - lib32
+  jail_parameters:
+      allow.raw_sockets: true
+      devfs_ruleset: 5
+  provision:
+      type: file
+      path: playbooks/jenkins.yml

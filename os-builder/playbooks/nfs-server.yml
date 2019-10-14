@@ -1,0 +1,35 @@
+---
+- name: NFS Server
+  hosts: nfs-server
+  tasks:
+      - name: Add user builder
+        user:
+            comment: "User building the sources"
+            name: builder
+            shell: /bin/tcsh
+      - name: Configure builder nfs export directory
+        file:
+            path: "{{ item }}"
+            group: builder
+            state: directory
+            owner: builder
+        with_list:
+            - "/usr/home/builder/obj"
+            - "/usr/home/builder/src"
+      - name: Install utility packages
+        package:
+            name: "{{ item }}"
+            state: present
+        with_list:
+            - vim-console
+      - name: Install building & sync script
+        copy:
+            dest: "/usr/home/builder/{{ item }}"
+            mode: a+xr
+            owner: builder
+            group: builder
+            src: "{{ item }}"
+        with_list:
+            - build.sh
+            - sync.sh
+...
